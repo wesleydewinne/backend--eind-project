@@ -19,14 +19,14 @@ public class AdministratorController {
 
     @GetMapping
     public ResponseEntity<List<Administrator>> getAllAdministrators() {
-        return ResponseEntity.ok(administratorService.getAllAdministrators());
+        List<Administrator> admins = administratorService.getAllAdministrators();
+        return ResponseEntity.ok(admins);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Administrator> getAdministratorById(@PathVariable Long id) {
-        return administratorService.getAdministratorById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        Administrator admin = administratorService.getAdministratorById(id);
+        return ResponseEntity.ok(admin);
     }
 
     @PostMapping
@@ -41,4 +41,3 @@ public class AdministratorController {
         return ResponseEntity.noContent().build();
     }
 }
-

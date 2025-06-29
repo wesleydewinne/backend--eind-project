@@ -1,7 +1,7 @@
 package nl.novi.backend_eindopdracht.model.user.enums;
 
 public enum RolType {
-    BEHEERDER,
+    ADMINISTRATOR,
     TRAINER,
-    CURSIST
+    STUDENT
 }

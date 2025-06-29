@@ -1,11 +1,11 @@
 package nl.novi.backend_eindopdracht.service.user;
 
+import nl.novi.backend_eindopdracht.exception.user.StudentNotFoundException;
 import nl.novi.backend_eindopdracht.model.user.Student;
 import nl.novi.backend_eindopdracht.repository.user.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -20,8 +20,9 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
-    public Optional<Student> getStudentById(Long id) {
-        return studentRepository.findById(id);
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(id));
     }
 
     public Student saveStudent(Student student) {
@@ -29,7 +30,9 @@ public class StudentService {
     }
 
     public void deleteStudent(Long id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException("Kan student met ID " + id + " niet verwijderen: niet gevonden.");
+        }
         studentRepository.deleteById(id);
     }
 }
-

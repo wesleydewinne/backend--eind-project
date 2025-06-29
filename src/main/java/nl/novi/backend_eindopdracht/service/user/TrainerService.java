@@ -1,11 +1,11 @@
 package nl.novi.backend_eindopdracht.service.user;
 
+import nl.novi.backend_eindopdracht.exception.user.TrainerNotFoundException;
 import nl.novi.backend_eindopdracht.model.user.Trainer;
 import nl.novi.backend_eindopdracht.repository.user.TrainerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TrainerService {
@@ -20,8 +20,9 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    public Optional<Trainer> getTrainerById(Long id) {
-        return trainerRepository.findById(id);
+    public Trainer getTrainerById(Long id) {
+        return trainerRepository.findById(id)
+                .orElseThrow(() -> new TrainerNotFoundException(id));
     }
 
     public Trainer saveTrainer(Trainer trainer) {
@@ -29,6 +30,9 @@ public class TrainerService {
     }
 
     public void deleteTrainer(Long id) {
+        if (!trainerRepository.existsById(id)) {
+            throw new TrainerNotFoundException("Kan trainer met ID " + id + " niet verwijderen: niet gevonden.");
+        }
         trainerRepository.deleteById(id);
     }
 }

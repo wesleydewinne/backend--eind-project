@@ -1,7 +1,7 @@
 package nl.novi.backend_eindopdracht.service.user;
 
 import nl.novi.backend_eindopdracht.helper.user.UserHelper;
-import nl.novi.backend_eindopdracht.model.enums.RolType;
+import nl.novi.backend_eindopdracht.model.user.enums.RolType;
 import nl.novi.backend_eindopdracht.model.user.Administrator;
 import nl.novi.backend_eindopdracht.repository.user.AdministratorRepository;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class AdministratorService {
         return admins;
     }
 
-    public Administrator getAdministratorById(int id) {
+    public Administrator getAdministratorById(Long id) {
         Administrator admin = administratorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Administrator met id " + id + " niet gevonden"));
 
@@ -50,7 +50,7 @@ public class AdministratorService {
         return administratorRepository.save(administrator);
     }
 
-    public void deleteAdministrator(int id) {
+    public void deleteAdministrator(Long id) {
         if (!administratorRepository.existsById(id)) {
             throw new EntityNotFoundException("Administrator met id " + id + " bestaat niet");
         }

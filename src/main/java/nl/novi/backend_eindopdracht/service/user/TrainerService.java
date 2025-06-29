@@ -20,7 +20,7 @@ public class TrainerService {
         return trainerRepository.findAll();
     }
 
-    public Optional<Trainer> getTrainerById(int id) {
+    public Optional<Trainer> getTrainerById(Long id) {
         return trainerRepository.findById(id);
     }
 
@@ -28,7 +28,7 @@ public class TrainerService {
         return trainerRepository.save(trainer);
     }
 
-    public void deleteTrainer(int id) {
+    public void deleteTrainer(Long id) {
         trainerRepository.deleteById(id);
     }
 }

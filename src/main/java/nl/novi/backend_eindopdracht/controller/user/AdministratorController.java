@@ -23,7 +23,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Administrator> getAdministratorById(@PathVariable int id) {
+    public ResponseEntity<Administrator> getAdministratorById(@PathVariable Long id) {
         return administratorService.getAdministratorById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -36,7 +36,7 @@ public class AdministratorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAdministrator(@PathVariable int id) {
+    public ResponseEntity<Void> deleteAdministrator(@PathVariable Long id) {
         administratorService.deleteAdministrator(id);
         return ResponseEntity.noContent().build();
     }

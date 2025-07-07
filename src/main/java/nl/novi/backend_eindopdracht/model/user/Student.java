@@ -15,8 +15,8 @@ public class Student extends User {
         this.setRole(RolType.STUDENT); // Of RolType.STUDENT als dat zo heet in je enum
     }
 
-    public Student(String name, String email, String password, String enrolledCourse) {
-        super(name, email, password, RolType.STUDENT);
+    public Student(String firstname, String lastname, String email, String password, String enrolledCourse) {
+        super(firstname, lastname, email, password, RolType.STUDENT);
         this.enrolledCourse = enrolledCourse;
     }
 

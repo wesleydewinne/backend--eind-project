@@ -15,8 +15,8 @@ public class Administrator extends User {
         this.setRole(RolType.ADMINISTRATOR);  // Stel de rol standaard in
     }
 
-    public Administrator(String name, String email, String password, String roleDescription) {
-        super(name, email, password, RolType.ADMINISTRATOR);
+    public Administrator(String firstname, String lastname, String email, String password, String roleDescription) {
+        super(firstname, lastname,  email, password, RolType.ADMINISTRATOR);
         this.roleDescription = roleDescription;
     }
 

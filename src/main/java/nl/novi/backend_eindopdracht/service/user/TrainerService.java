@@ -29,6 +29,18 @@ public class TrainerService {
         return trainerRepository.save(trainer);
     }
 
+    public Trainer updateTrainer(Long id, Trainer trainerDetails) {
+        return trainerRepository.findById(id)
+                .map(trainer -> {
+                    trainer.setFirstname(trainerDetails.getFirstname());
+                    trainer.setLastname(trainerDetails.getLastname());
+                    trainer.setEmail(trainerDetails.getEmail());
+
+                    return trainerRepository.save(trainer);
+                })
+                .orElseThrow(() -> new TrainerNotFoundException("Trainer met ID " + id + " niet gevonden"));
+    }
+
     public void deleteTrainer(Long id) {
         if (!trainerRepository.existsById(id)) {
             throw new TrainerNotFoundException("Kan trainer met ID " + id + " niet verwijderen: niet gevonden.");

@@ -50,6 +50,18 @@ public class AdministratorService {
         return administratorRepository.save(administrator);
     }
 
+    public Administrator updateAdministrator(Long id, Administrator administratorDetails) {
+        return administratorRepository.findById(id)
+                .map(admin -> {
+                    admin.setFirstname(administratorDetails.getFirstname());
+                    admin.setLastname(administratorDetails.getLastname());
+                    admin.setEmail(administratorDetails.getEmail());
+
+                    return administratorRepository.save(admin);
+                })
+                .orElseThrow(() -> new AdministratorNotFoundException("Administrator met ID " + id + " niet gevonden"));
+    }
+
     public void deleteAdministrator(Long id) {
         if (!administratorRepository.existsById(id)) {
             throw new EntityNotFoundException("Administrator met id " + id + " bestaat niet");

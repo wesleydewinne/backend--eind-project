@@ -1,4 +1,4 @@
-package nl.novi.backend_eindopdracht.helper.user;
+package nl.novi.backend_eindopdracht.util.user;
 
 import nl.novi.backend_eindopdracht.model.user.enums.RolType;
 import nl.novi.backend_eindopdracht.model.user.User;

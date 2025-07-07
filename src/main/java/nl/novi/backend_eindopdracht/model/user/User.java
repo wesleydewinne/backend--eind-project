@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import nl.novi.backend_eindopdracht.model.user.enums.RolType;
 
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type")
 public abstract class User {
 
@@ -12,10 +12,9 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
+    private String firstname;
+    private String lastname;
     private String email;
-
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -23,8 +22,9 @@ public abstract class User {
 
     public User() { }
 
-    public User(String name, String email, String password, RolType role) {
-        this.name = name;
+    public User(String firstname, String lastname, String email, String password, RolType role) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.role = role;
@@ -35,12 +35,15 @@ public abstract class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstname() {
+        return firstname;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
+
+    public String getLastname() { return lastname; }
+    public void setLastname(String lastname) { this.lastname = lastname;}
 
     public String getEmail() {
         return email;

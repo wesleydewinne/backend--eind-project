@@ -28,6 +28,17 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    public Student updateStudent(Long id, Student studentDetails) {
+        Student existingStudent = studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException("Student not found with id " + id));
+
+        existingStudent.setFirstname(studentDetails.getFirstname());
+        existingStudent.setLastname(studentDetails.getLastname());
+        existingStudent.setEmail(studentDetails.getEmail());
+
+        return studentRepository.save(existingStudent);
+    }
+
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }

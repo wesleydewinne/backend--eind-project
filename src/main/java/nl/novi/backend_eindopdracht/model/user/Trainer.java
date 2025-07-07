@@ -15,8 +15,8 @@ public class Trainer extends User {
         this.setRole(RolType.TRAINER); // Zet default rol
     }
 
-    public Trainer(String name, String email, String password, String expertise) {
-        super(name, email, password, RolType.TRAINER);
+    public Trainer(String fistname, String lastname, String email, String password, String expertise) {
+        super(fistname, lastname, email, password, RolType.TRAINER);
         this.expertise = expertise;
     }
 

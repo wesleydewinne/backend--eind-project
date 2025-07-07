@@ -54,7 +54,7 @@ public class LocationService {
         location.setBuilding(dto.getBuilding());
         location.setExtraInfo(dto.getExtraInfo());
         location.setPhoneNumber(dto.getPhoneNumber());
-        location.setFireDrillAvailable(dto.isFireDrillAvailable());
+        location.setFireDrillPossible(dto.isFireDrillPossible());
         location.setFireDrillLocation(dto.getFireDrillLocation());
 
         location = locationRepository.save(location);

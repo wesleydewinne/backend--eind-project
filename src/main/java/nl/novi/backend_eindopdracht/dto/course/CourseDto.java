@@ -1,23 +1,14 @@
-package nl.novi.backend_eindopdracht.model.course;
-
-import jakarta.persistence.*;
-import nl.novi.backend_eindopdracht.model.user.Trainer;
-import nl.novi.backend_eindopdracht.model.user.Student;
+package nl.novi.backend_eindopdracht.dto.course;
 
 import nl.novi.backend_eindopdracht.model.course.enums.CourseStatus;
 import nl.novi.backend_eindopdracht.model.course.enums.CourseType;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@Table(name = "courses")
-public class Course {
+public class CourseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String courseCode;
     private LocalDate trainingDate;
@@ -25,38 +16,14 @@ public class Course {
     private String description;
     private LocalTime startTime;
     private LocalTime endTime;
-
-    @Enumerated(EnumType.STRING)
     private CourseType courseType;
-
-    @Enumerated(EnumType.STRING)
     private CourseStatus status;
-
-    private int maxParticipants = 10;
+    private int maxParticipants;
     private int availableSpots;
+    private Long trainerId;
+    private Set<Long> studentIds;
 
-    @ManyToOne
-    @JoinColumn(name = "trainer_id")
-    private Trainer trainer;
-
-    @ManyToMany
-    @JoinTable(
-            name = "course_students",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    private Set<Student> students = new HashSet<>();
-
-    public Course() {}
-
-    @PrePersist
-    public void generateCourseCode() {
-        this.courseCode = "CRS-" + System.currentTimeMillis();
-        this.availableSpots = maxParticipants;
-    }
-
-    // Getters en setters hieronder
-
+    // Getters en setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -90,18 +57,9 @@ public class Course {
     public int getAvailableSpots() { return availableSpots; }
     public void setAvailableSpots(int availableSpots) { this.availableSpots = availableSpots; }
 
-    public Trainer getTrainer() { return trainer; }
-    public void setTrainer(Trainer trainer) { this.trainer = trainer; }
+    public Long getTrainerId() { return trainerId; }
+    public void setTrainerId(Long trainerId) { this.trainerId = trainerId; }
 
-    public Set<Student> getStudents() { return students; }
-    public void setStudents(Set<Student> students) { this.students = students; }
-
-    public void addStudent(Student student) {
-        if (students.size() < maxParticipants) {
-            students.add(student);
-            availableSpots = maxParticipants - students.size();
-        } else {
-            throw new IllegalStateException("Maximaal aantal cursisten bereikt");
-        }
-    }
+    public Set<Long> getStudentIds() { return studentIds; }
+    public void setStudentIds(Set<Long> studentIds) { this.studentIds = studentIds; }
 }

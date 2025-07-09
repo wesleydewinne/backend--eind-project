@@ -1,4 +1,4 @@
-package nl.novi.backend_eindopdracht.model.course;
+package nl.novi.backend_eindopdracht.model.course.enums;
 
 public enum CourseStatus {
     PLANNED,
